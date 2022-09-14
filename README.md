@@ -36,7 +36,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 ### Links
 
 - Solution URL: [Github](https://github.com/aldijoko/blogr-landing)
-- Live Site URL: [Live Url](https://aldijoko.github.io/blogr-landing/)
+- Live Site URL: [Live Url](https://blogr-landing.vercel.app/)
 
 ## My process
 
@@ -49,7 +49,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 ### Useful resources
 
 - [Sveltekit](https://kit.svelte.dev/) - This helped me for Install using svelte.js and learn about svelte.
-- [Netlify](https://www.netlify.com/) - This helped me for deploy my project when using svelte.
+- [Vercel](https://www.vercel.com/) - This helped me for deploy my project when using svelte.
 
 
 ## Author
