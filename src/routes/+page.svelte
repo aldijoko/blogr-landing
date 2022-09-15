@@ -1,5 +1,11 @@
 <script>
     import '../app.css';
+
+    let isOpen = false;
+    let isConnect = false;
+
+    let open = false;
+
 </script>
 
 <section class="header">
@@ -16,9 +22,16 @@
                         <p>Company</p>
                         <img src="images/icon-arrow-light.svg" alt="">
                     </div>
-                    <div class="menuLeft">
+                    <div class="menuLeft" on:click={() => open = !open} aria-expanded={open}>
                         <p>Connect</p>
-                        <img src="images/icon-arrow-light.svg" alt="">
+                        <img class="arrow" src="images/icon-arrow-light.svg" alt="">
+                        {#if open}
+                            <div class="menuList">
+                                <a class="listDesk" href="">Contact</a>
+                                <a class="listDesk" href="">Newsletter</a>
+                                <a class="listDesk" href="">LinkedIn</a>
+                            </div>
+                        {/if}
                     </div>
                 </div>
             </div>
@@ -42,8 +55,9 @@
                 <img src="images/logo.svg" alt="">
             </div>
             <div>
-                <img src="images/icon-hamburger.svg" alt="">
+                <img class="hamb" src="images/icon-hamburger.svg" alt="" on:click={()=> isOpen = !isOpen}>
             </div>
+            
         </div>
         <div class="mobileContent">
             <h1>A modern publishing platform</h1>
@@ -52,6 +66,34 @@
                 <button class="btnSign">Start for Free</button>
                 <button class="btnLearn">Learn More</button>
             </div>
+            {#if isOpen}
+                <div class="menuList">
+                    <div class="menusList">
+                        <span class="menusTxt">Product</span>
+                        <img src="images/icon-arrow-dark.svg" alt="">
+                    </div>
+                    <div class="menusList">
+                        <span class="menusTxt">Company</span>
+                        <img src="images/icon-arrow-dark.svg" alt="">
+                    </div>
+                    <div class="menusList" on:click={() => isConnect = !isConnect} class:is-active={isConnect} aria-expanded={isConnect}>
+                        <span class="menusTxt">Connect</span>
+                        <img class="arrow" src="images/icon-arrow-dark.svg" alt="">
+                    </div>
+                    {#if isConnect}
+                        <div class="accor">
+                            <a class="accorList" href="">Contact</a>
+                            <a class="accorList" href="">Newsletter</a>
+                            <a class="accorList" href="">Linkedin</a>
+                        </div>
+                    {/if}
+                    <div class="borderMenus"></div>
+                    <div class="logList">
+                        <a href="" class="loginMobile">Login</a>
+                        <button class="btnLearn hvrBtn" style="width: 150px; margin-top: 10px;">Sign Up</button>
+                    </div>
+                </div>
+            {/if}
         </div>
     </div>
 </section>
@@ -271,6 +313,7 @@
         font-family: 'Ubuntu', sans-serif;
         font-weight: 400;
         color: hsl(0, 0%, 100%);
+        position: relative;
     }
 
     .menuLeft:hover{
@@ -278,6 +321,32 @@
         cursor: pointer;
     }
 
+    .menuList{
+            position: absolute;
+            top: 30px;
+            left: -30px;
+            border: 1px solid hsl(0, 0%, 100%);
+            border-radius: 10px;
+            width: 150px;
+            height: max-content;
+            /* text-align: center; */
+            padding: 10px 25px;
+            background-color: hsl(0, 0%, 100%);
+            color: hsl(207, 13%, 34%);
+            display: flex;
+            flex-direction: column;
+        }
+
+    .listDesk {
+        text-decoration: none;
+        color: hsl(208, 49%, 24%);
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 500;
+        margin: 10px 0px;
+    }
+    .listDesk:hover{
+        font-weight: 700;
+    }
     .navRight {
         width: 50%;
         display: flex;
@@ -543,6 +612,10 @@
         cursor: pointer;
     }
 
+    [aria-expanded='true'] .arrow {
+		transform: rotate(0.5turn);
+	}
+
     @media only screen and (max-width: 768px) {
         .navHeader, .footerDesktop, .container {
             display: none;
@@ -567,9 +640,109 @@
             padding: 50px 20px;
         }
 
+        .menuList{
+            position: absolute;
+            top: -40px;
+            border: 1px solid hsl(0, 0%, 100%);
+            border-radius: 20px;
+            width: 90%;
+            height: max-content;
+            text-align: center;
+            padding: 10px;
+            background-color: hsl(0, 0%, 100%);
+            color: hsl(207, 13%, 34%);
+        }
+
+        .logList{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .loginMobile{
+            text-decoration: none;
+            color: hsl(207, 13%, 34%);
+            font-size: 16px;
+            font-family: 'Overpass', sans-serif;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .hvrBtn:hover{
+            border: 1px solid hsl(356, 100%, 66%);
+        }
+
+        .loginMobile:hover{
+            text-decoration: underline;
+        }
+
+        .menusList{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        [aria-expanded='true'] .arrow {
+		transform: rotate(0.5turn);
+	}
+
+        .menusList:hover{
+            text-decoration: underline;
+        }
+        
+        .is-active{
+            opacity: 0.6;
+        }
+
+        .accor{
+            width: 100%;
+            height: fit-content;
+            border: 1px solid hsl(240, 2%, 79%);
+            background-color: hsl(240, 2%, 79%);
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .accorList{
+            text-decoration: none;
+            color: hsl(208, 49%, 24%);
+            font-size: 16px;
+            font-family: 'Overpass', sans-serif;
+            font-weight: 600;
+            margin: 10px 0px;
+        }
+
+        .menusTxt {
+            font-size: 16px;
+            font-family: 'Overpass', sans-serif;
+            font-weight: 600;
+        }
+
+        .borderMenus{
+            border-top: 1px solid hsl(240, 2%, 79%);
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0px;
+        }
+
+        .hamb{
+            cursor: pointer;
+        }
+
         .mobileContent {
             padding: 20px 20px;
             text-align: center;
+            position: relative;
         }
 
         .mobileContent h1 {
